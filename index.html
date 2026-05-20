@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>विकाश ऑनलाईन सेन्टर - डिजिटल हब</title>
+    <!-- प्रीमियम आइकॉन लाइब्रेरी -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* 🔒 हेल्पलाइन नंबर और ईमेल के लिए स्पेशल 3D नियॉन लॉक डिज़ाइन */
+        .tech-lock-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(4, 6, 12, 0.7);
+            padding: 8px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 51, 51, 0.3);
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.1);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        .tech-hidden-number, .tech-hidden-email {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ff3333;
+            filter: blur(5px);
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .tech-hidden-email {
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .tech-lock-icon {
+            color: #ff3333;
+            font-size: 1.1rem;
+            animation: lockPulse 1.5s infinite ease-in-out;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes lockPulse {
+            0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 2px #ff3333); }
+            50% { transform: scale(0.92); opacity: 0.6; filter: drop-shadow(0 0 8px #ff3333); }
+        }
+
+        .tech-lock-box.unlocked {
+            border-color: #25D366;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            background: rgba(4, 6, 12, 0.9);
+        }
+
+        .tech-lock-box.unlocked .tech-hidden-number,
+        .tech-lock-box.unlocked .tech-hidden-email {
+            filter: blur(0px);
+            letter-spacing: 0.5px;
+        }
+
+        .tech-lock-box.unlocked .tech-lock-icon {
+            color: #25D366;
+            animation: none;
+            transform: rotate(360deg);
+        }
+
+        .csc-mega-title-rgb {
+            font-size: 3.2rem;
+            font-weight: 950;
+            letter-spacing: 3px;
+            margin: 15px 0 10px 0;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ffcc00, #ff007f, #00f5d4, #ff3333, #ffcc00);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbGlow 5s linear infinite; 
+            filter: drop-shadow(0 5px 15px rgba(255, 204, 0, 0.4));
+        }
+
+        .csc-id-mega-rgb {
+            font-size: 1.9rem;
+            font-weight: 900; 
+            letter-spacing: 2px;
+            margin: 15px auto 40px auto;
+            display: inline-block;
+            background: linear-gradient(90deg, #00ffcc, #00baf2, #ffcc00, #ff007f, #00ffcc);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbGlow 4s linear infinite; 
+            filter: drop-shadow(0 4px 10px rgba(0, 245, 212, 0.3));
+        }
+        .csc-id-mega-rgb i { margin-right: 10px; }
+
+        @media (max-width: 868px) {
+            .csc-mega-title-rgb { font-size: 2.1rem; margin-bottom: 5px; }
+            .csc-id-mega-rgb { font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body class="theme-mix-rgb">
+
+    <!-- ⚙️ एडवांस 3D थीम पैनल -->
+    <div class="settings-widget" id="settingsWidget">
+        <button class="settings-toggle-btn" id="settingsToggleBtn" title="बैकग्राउंड बदलें">
+            <i class="fas fa-cog"></i>
+        </button>
+        <div class="settings-panel">
+            <h4>थीम सेटिंग</h4>
+            <div class="theme-options">
+                <button class="theme-btn-opt opt-mix" onclick="changeTheme('theme-mix-rgb')">Mix RGB</button>
+                <button class="theme-btn-opt opt-grey" onclick="changeTheme('theme-deep-grey')">Deep Grey</button>
+                <button class="theme-btn-opt opt-blue" onclick="changeTheme('theme-dark-blue')">Dark Blue</button>
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;">
+                <button class="theme-btn-opt opt-light-gray" onclick="changeTheme('theme-light-gray')">Light Gray</button>
+                <button class="theme-btn-opt opt-light-yellow" onclick="changeTheme('theme-light-yellow')">Light Yellow</button>
+                <button class="theme-btn-opt opt-light-mix" onclick="changeTheme('theme-light-mix')">Light Mix</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🧭 डिजिटल नेविगेशन बार -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <span class="logo-title-header">विकाश ऑनलाईन सेन्टर</span>
+            </div>
+            
+            <button class="menu-btn" id="menuToggle" aria-label="मेनू देखें">
+                <i class="fas fa-bars"></i> <span style="font-size: 0.9rem; font-weight: 800; vertical-align: middle;">मेनू</span>
+            </button>
+
+            <nav class="nav-links" id="navMenu">
+                <button class="close-menu-btn" id="menuCloseBtn" aria-label="मेनू छुपाएं">
+                    <i class="fas fa-times"></i> छुपाएं
+                </button>
+                <a href="#home" class="nav-item">होम</a>
+                <a href="#about" class="nav-item">हमारे बारे में</a>
+                <a href="#services" class="nav-item">सेवाएं व स्टोर</a>
+                <a href="#payment" class="nav-item">पेमेंट</a>
+                <a href="mailto:vk9661627100@://gmail.comिजिटल%20सेवा%20पूछताछ" class="nav-item nav-email-btn"><i class="fas fa-envelope"></i> ईमेल करें</a>
+                <a href="#contact" class="nav-item nav-btn">संपर्क करें</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ⚡ हीरो सेक्शन -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="rgb-box-3d">
+                <h1 class="hero-title-rgb">विकाश ऑनलाईन सेन्टर</h1>
+            </div>
+            <div class="csc-mega-title-rgb">
+                <i class="fas fa-shield-halved"></i> CSC DIGITAL HUB
+            </div>
+            <p class="hero-subtitle">राजपुर का सबसे उन्नत और भरोसेमंद डिजिटल, साइबर-टेक एवं स्टेशनरी केंद्र</p>
+            <div class="csc-id-mega-rgb">
+                <i class="fas fa-certificate"></i> AUTHORIZED CSC ID: 414532160013
+            </div>
+            <div class="hero-actions">
+                <a href="#services" class="primary-btn-digital">हमारी डिजिटल सेवाएं</a>
+                <a href="https://whatsapp.com्ते%20विकाश%20जी" target="_blank" class="whatsapp-btn-digital">
+                    <i class="fab fa-whatsapp"></i> WhatsApp चैट
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📝 हमारे बारे में सेक्शन -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <h2 class="section-title">हमारे बारे में</h2>
+            <div class="title-underline"></div>
+            <div class="about-card-digital">
+                <p class="about-text">
+                    <strong>विकाश ऑनलाईन सेन्टर</strong> राजपुर (पिन कोड: 802219) में स्थित एक पूर्णतः कंप्यूटरीकृत और अधिकृत कॉमन सर्विस सेंटर (CSC) है। इसके प्रोपराइटर <strong>विकाश कुमार</strong> हैं। अत्याधुनिक तकनीकों से लैस हमारा डिजिटल केंद्र क्षेत्र के नागरिकों को तेज़, सुरक्षित और 100% पारदर्शी डिजिटल सरकारी एवं बैंकिंग सेवाएं प्रदान करता है। हमारी दुकान दक्षिण बिहार ग्रामीण बैंक के सामने वाली गली में स्थित है।
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🛠的位置 प्रीमियम डिजिटल सेवाएं व स्टेशनरी स्टोर सेक्शन -->
+    <section id="services" class="services-section">
+        <div class="section-container">
+            <h2 class="section-title">हमारी मुख्य सेवाएं व स्टोर</h2>
+            <div class="title-underline"></div>
+            
+            <!-- फिल्टर टैब्स मेनू -->
+            <div class="services-tabs-container">
+                <button class="tab-filter-btn active" onclick="filterServices('all')">सब कुछ देखें</button>
+                <button class="tab-filter-btn btn-tab-gold" onclick="filterServices('govt')">सरकारी योजनाएं</button>
+                <button class="tab-filter-btn btn-tab-green" onclick="filterServices('banking')">डिजिटल बैंकिंग</button>
+                <button class="tab-filter-btn btn-tab-purple" onclick="filterServices('internet')">इंटरनेट कार्य</button>
+                <button class="tab-filter-btn btn-tab-cyan" onclick="filterServices('stationery')">✏️ स्टेशनरी सामान</button>
+            </div>
+
+            <!-- ग्रिड कंटेनर -->
+            <div class="gov-services-grid">
+                
+                <!-- 🌐 श्रेणी: सरकारी योजनाएं -->
+                <div class="gov-card-arrow arrow-blue" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-id-card"></i></div>
+                    <h3>आधार कार्ड सेवा</h3>
+                    <p>नया आधार डाउनलोड, प्रिंट और ऑनलाइन डेटा सुधार कार्य।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-red" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-address-card"></i></div>
+                    <h3>पैन कार्ड सेवा</h3>
+                    <p>नया पैन कार्ड आवेदन और खोए हुए पैन कार्ड का सुधार।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-green" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-file-signature"></i></div>
+                    <h3>आय, जाति, निवास</h3>
+                    <p>आय, जाति और निवास प्रमाण पत्र का त्वरित ऑनलाइन आवेदन।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-gold" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-wheat-awn"></i></div>
+                    <h3>राशन कार्ड सेवा</h3>
+                    <p>नया राशन कार्ड आवेदन और नाम जोड़ना।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-pink" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-user-doctor"></i></div>
+                    <h3>आयुष्मान कार्ड</h3>
+                    <p>5 लाख तक मुफ़्त इलाज वाला आयुष्मान भारत कार्ड बनाना।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-cyan" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-hammer"></i></div>
+                    <h3>ई-श्रम कार्ड</h3>
+                    <p>मजदूरों और असंगठित क्षेत्र के लोगों के लिए श्रम कार्ड पंजीकरण।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-purple" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-user-shield"></i></div>
+                    <h3>आचरण प्रमाण-पत्र</h3>
+                    <p>पुलिस वेरिफिकेशन/चरित्र प्रमाण पत्र का नया ऑनलाइन आवेदन।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-orange" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-building-user"></i></div>
+                    <h3>नॉन-क्रीमीलेयर (बिहार)</h3>
+                    <p>बिहार सरकार के अंतर्गत OBC (BC/EBC) आरक्षण हेतु प्रमाण पत्र।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-blue" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-gavel"></i></div>
+                    <h3>नॉन-क्रीमीलेयर (भारत)</h3>
+                    <p>केंद्र सरकार की नौकरियों एवं केंद्रीय संस्थानों हेतु OBC प्रमाण पत्र।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-red" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-percent"></i></div>
+                    <h3>EWS प्रमाण पत्र</h3>
+                    <p>सामान्य वर्ग के आर्थिक रूप से कमजोर नागरिकों के लिए १०% आरक्षण कार्ड।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-green" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-seedling"></i></div>
+                    <h3>किसान पंजीयन व ID</h3>
+                    <p>नया किसान पंजीकरण, फार्मर ID कार्ड और कृषि योजनाओं का लाभ।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-gold" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-users-viewfinder"></i></div>
+                    <h3>वोटर पहचान पत्र</h3>
+                    <p>नया वोटर लिस्ट नाम सुधार, पहचान पत्र डाउनलोड और डिजिटल प्रिंट।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-cyan" data-category="govt">
+                    <div class="gov-icon-arrow"><i class="fas fa-users-line"></i></div>
+                    <h3>जीवन प्रमाण-पत्र</h3>
+                    <p>वृद्धा, विकलांग और विधवा पेंशन धारकों के लिए डिजिटल लाइफ सर्टिफिकेट।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+
+                <!-- 🏦 श्रेणी: डिजिटल बैंकिंग -->
+                <div class="gov-card-arrow arrow-green" data-category="banking">
+                    <div class="gov-icon-arrow"><i class="fas fa-fingerprint"></i></div>
+                    <h3>नकद निकासी (AEPS)</h3>
+                    <p>किसी भी bank खाते से अंगूठा लगाकर तुरंत सुरक्षित पैसे निकालें।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-blue" data-category="banking">
+                    <div class="gov-icon-arrow"><i class="fas fa-money-bill-transfer"></i></div>
+                    <h3>मनी ट्रांसफर</h3>
+                    <p>भारत के किसी भी बैंक खाते में तुरंत सुरक्षित पैसा भेजें।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-purple" data-category="banking">
+                    <div class="gov-icon-arrow"><i class="fas fa-credit-card"></i></div>
+                    <h3>माइक्रो एटीएम</h3>
+                    <p>अपने एटीएम (ATM) कार्ड द्वारा दुकान पर ही नकद निकासी करें।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+
+                <!-- ⚡ श्रेणी: इंटरनेट व डिजिटल कार्य -->
+                <div class="gov-card-arrow arrow-gold" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-bolt"></i></div>
+                    <h3>बिजली बिल भुगतान</h3>
+                    <p>सभी प्रकार के घरेलू और कमर्शियल बिजली बिल ऑनलाइन जमा करें।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-cyan" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-mobile-screen"></i></div>
+                    <h3>रिचार्ज व फास्टैग</h3>
+                    <p>सभी मोबाइल, डीटीएच (DTH) रिचार्ज और फास्टैग टॉप-अप की सुविधा।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-orange" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-ticket"></i></div>
+                    <h3>टिकट बुकिंग</h3>
+                    <p>ट्रेन (IRCTC), फ्लाइट और बस टिकट की कन्फर्म बुकिंग करें।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-pink" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-print"></i></div>
+                    <h3>फोटोकॉपी व लेमिनेशन</h3>
+                    <p>साफ-सुथरी डिजिटल प्रिंटिंग, कलर फोटोकॉपी और सुरक्षित लेमिनेशन।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-blue" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-map-location-dot"></i></div>
+                    <h3>लगान रसीद प्रिंट</h3>
+                    <p>बिहार भूमि ऑनलाइन लगान भुगतान एवं रसीद का डिजिटल डाउनलोड।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-red" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-hands-holding-child"></i></div>
+                    <h3>LIC प्रीमियम जमा</h3>
+                    <p>भारतीय जीवन बीमा निगम (LIC) की किस्त ऑनलाइन जमा करें रसीद पाएं।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-green" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>एडमिट कार्ड व रिजल्ट</h3>
+                    <p>सभी बोर्ड, यूनिवर्सिटी और सरकारी परीक्षाओं के एडमिट कार्ड व रिजल्ट प्रिंट।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-pink" data-category="internet">
+                    <div class="gov-icon-arrow"><i class="fas fa-camera-retro"></i></div>
+                    <h3>कलर पासपोर्ट फोटो</h3>
+                    <p>उच्च गुणवत्ता वाले डिजिटल कलर कैमरा फोटो तुरंत प्रिंट की सुविधा।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+
+                <!-- ✏️ श्रेणी: स्टेशनरी प्रॉडक्ट्स -->
+                <div class="gov-card-arrow arrow-cyan" data-category="stationery">
+                    <div class="gov-icon-arrow"><i class="fas fa-book"></i></div>
+                    <h3>कॉपी व रजिस्टर</h3>
+                    <p>स्कूल, कॉलेज, ड्राइंग कॉपियां और सभी प्रकार के मोटे एकाउंट्स रजिस्टर।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-gold" data-category="stationery">
+                    <div class="gov-icon-arrow"><i class="fas fa-pen-nib"></i></div>
+                    <h3>पेन, पेन्सिल, लीड</h3>
+                    <p>ब्रांडेड बॉल पेन, जेल पेन, कटर, रबर, इन्च (स्केल) और मैकेनिकल पेन्सिल लीड।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-pink" data-category="stationery">
+                    <div class="gov-icon-arrow"><i class="fas fa-box-open"></i></div>
+                    <h3>गोंद व सेलो टेप</h3>
+                    <p>कागजात चिपकाने हेतु मजबूत ग्लू स्टिक, लिक्विड गोंद और पारदर्शी सेलो टेप।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-blue" data-category="stationery">
+                    <div class="gov-icon-arrow"><i class="fas fa-palette"></i></div>
+                    <h3>चार्ट व कलर पेपर</h3>
+                    <p>प्रोजेक्ट्स के लिए बड़े चार्ट पेपर, रंगीन कलर शीट्स और वॉटर/क्रयॉन कलर्स।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+                <div class="gov-card-arrow arrow-red" data-category="stationery">
+                    <div class="gov-icon-arrow"><i class="fas fa-battery-three-quarters"></i></div>
+                    <h3>एवरेडी बैटरी व इंक</h3>
+                    <p>घड़ियों व रिमोट हेतु एवरइलेक्ट्रिक बैटरी और मोहर व पेन की रिफिल इंक।</p>
+                    <div class="arrow-tip"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 💳 आधुनिक 3D प्रीमियम पेमेंट सेक्शन -->
+    <section id="payment" class="payment-section">
+        <div class="section-container">
+            <h2 class="section-title">सुरक्षित ऑनलाइन पेमेंट</h2>
+            <div class="title-underline"></div>
+            <p class="section-subtitle payment-subtitle-3d-rgb">त्वरित भुगतान के लिए नीचे दिए गए एडवांस 3D डिजिटल क्यूआर चैनलों को स्कैन करें।</p>
+            
+            <div class="qr-container">
+                <div class="payment-card-3d-premium card-phonepe">
+                    <div class="card-header-tech">
+                        <i class="fas fa-bolt-lightning text-red animate-flash"></i> ONLINE GATEWAY
+                    </div>
+                    <div class="qr-wrapper-3d">
+                        <img src="https://qrserver.com" alt="PhonePe QR Code" class="qr-image-digital-3d">
+                    </div>
+                    <h3>PhonePe / Airtel</h3>
+                    <div class="upi-text-digital-3d"><i class="fas fa-wallet text-red"></i> 9661627100airtel@ybl</div>
+                    <div class="card-footer-tech">स्कैन करके भुगतान करें</div>
+                </div>
+
+                <div class="payment-card-3d-premium card-paytm">
+                    <div class="card-header-tech">
+                        <i class="fas fa-shield-halved text-gold animate-flash"></i> SECURE CHANNEL
+                    </div>
+                    <div class="qr-wrapper-3d">
+                        <img src="https://qrserver.com" alt="Paytm QR Code" class="qr-image-digital-3d">
+                    </div>
+                    <h3>Paytm Payment</h3>
+                    <div class="upi-text-digital-3d"><i class="fas fa-mobile-screen text-gold"></i> 6206311624@ptsbi</div>
+                    <div class="card-footer-tech">स्कैन करके भुगतान करें</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📞 संपर्क सेक्शन (🔴 यहाँ जोड़ा गया लाइव फॉर्मस्प्री एंडपॉइंट URL) -->
+    <section id="contact" class="contact-section">
+        <div class="section-container">
+            <h2 class="section-title contact-title-rgb">हमसे संपर्क करें</h2>
+            <div class="title-underline"></div>
+            
+            <div class="contact-grid">
+                <div class="info-box-3d">
+                    <div class="info-item-digital-3d">
+                        <div class="info-icon-3d-glow"><i class="fas fa-location-crosshairs"></i></div>
+                        <div class="info-content">
+                            <h4>डिजिटल लोकेशन:</h4>
+                            <p class="address-pila">ग्राम+पोस्ट+थाना: राजपुर (नोखा रोड), दक्षिण बिहार ग्रामीण बैंक के सामने वाली गली में,</p>
+                            <p class="address-pila"><strong>पिन कोड:</strong> 802219</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item-digital-3d">
+                        <div class="info-icon-3d-glow"><i class="fas fa-headset"></i></div>
+                        <div class="info-content">
+                            <h4>हेल्पलाइन नंबर:</h4>
+                            <div class="tech-lock-box" id="phoneLockContainer" title="नंबर देखने के लिए क्लिक करें">
+                                <i class="fas fa-lock tech-lock-icon" id="lockIcon"></i>
+                                <span class="tech-hidden-number phone-number-rgb" id="hiddenPhone">+91 9661627100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-item-digital-3d">
+                        <div class="info-icon-3d-glow"><i class="fas fa-envelope-open-text"></i></div>
+                        <div class="info-content">
+                            <h4>ईमेल पता:</h4>
+                            <div class="tech-lock-box" id="emailLockContainer" title="ईमेल देखने के लिए क्लिक करें">
+                                <i class="fas fa-lock tech-lock-icon" id="emailLockIcon"></i>
+                                <span class="tech-hidden-email phone-number-rgb" id="hiddenEmail">vk9661627100@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-box-digital">
+                    <!-- 🔴 फॉर्मस्प्री एक्शन एंडपॉइंट बिल्कुल सही तरीके से एक्टिवेटेड -->
+                    <form class="modern-form" action="https://formspree.io/f/mjgzgqdb" method="POST">
+                        <input type="text" name="customer_name" placeholder="आपका नाम" required class="form-input">
+                        <input type="tel" name="customer_mobile" placeholder="आपका mobile नंबर" required class="form-input">
+                        <textarea name="customer_message" placeholder="अपनी समस्या या आवश्यक सेवा के बारे में यहाँ लिखें..." rows="4" required class="form-input"></textarea>
+                        <button type="submit" class="submit-btn-digital">रिक्वेस्ट भेजें</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🟢 डिजिटल फ्लोटिंग WhatsApp बटन -->
+    <a href="https://whatsapp.com्ते%20विकाश%20जी" class="floating-wa-digital" target="_blank" title="WhatsApp पर बात करें">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- 🏁 फुटर -->
+    <footer class="main-footer">
+        <p>&copy; 2026 विकाश ऑनलाईन सेन्टर (राजपुर). प्रोपराइटर: विकाश कुमार. सभी अधिकार सुरक्षित हैं।</p>
+    </footer>
+
+    <!-- ⚙️ स्क्रिप्ट्स -->
+    <script>
+        // 🛠️ टैब फ़िल्टर सर्विस व स्टोर लॉजिक
+        function filterServices(category) {
+            const cards = document.querySelectorAll('.gov-card-arrow');
+            const buttons = document.querySelectorAll('.tab-filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // ⚙️ बैकग्राउंड थीम चेंजर
+        const widget = document.getElementById('settingsWidget');
+        const toggleBtn = document.getElementById('settingsToggleBtn');
+        
+        if(toggleBtn && widget) {
+            toggleBtn.addEventListener('click', () => {
+                widget.classList.toggle('active');
+            });
+        }
+
+        function changeTheme(themeName) {
+            document.body.className = '';
+            document.body.classList.add(themeName);
+        }
+
+        // 📱 मोबाइल मेनू लॉजिक
+        const menuToggle = document.getElementById('menuToggle');
+        const menuCloseBtn = document.getElementById('menuCloseBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        if(menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => navMenu.classList.add('open'));
+        }
+        if(menuCloseBtn && navMenu) {
+            menuCloseBtn.addEventListener('click', () => navMenu.classList.remove('open'));
+        }
+        document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => {
+            if(navMenu) navMenu.classList.remove('open');
+        }));
+
+        // 🔒 हेल्पलाइन नंबर लॉक/अनलॉक
+        const lockBox = document.getElementById('phoneLockContainer');
+        const lockIcon = document.getElementById('lockIcon');
+        let isNumberUnlocked = false;
+
+        if(lockBox && lockIcon) {
+            lockBox.addEventListener('click', () => {
+                isNumberUnlocked = !isNumberUnlocked;
+                if(isNumberUnlocked) {
+                    lockBox.classList.add('unlocked');
+                    lockIcon.className = 'fas fa-lock-open tech-lock-icon';
+                } else {
+                    lockBox.classList.remove('unlocked');
+                    lockIcon.className = 'fas fa-lock tech-lock-icon';
+                }
+            });
+        }
+
+        // 🔒 ईमेल लॉक/अनलॉक
+        const emailBox = document.getElementById('emailLockContainer');
+        const emailIcon = document.getElementById('emailLockIcon');
+        let isEmailUnlocked = false;
+
+        if(emailBox && emailIcon) {
+            emailBox.addEventListener('click', () => {
+                isEmailUnlocked = !isEmailUnlocked;
+                if(isEmailUnlocked) {
+                    emailBox.classList.add('unlocked');
+                    emailIcon.className = 'fas fa-lock-open tech-lock-icon';
+                } else {
+                    emailBox.classList.remove('unlocked');
+                    emailIcon.className = 'fas fa-lock tech-lock-icon';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
